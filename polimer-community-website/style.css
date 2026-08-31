@@ -1,0 +1,754 @@
+/* =============================================================
+   DESIGN TOKENS (CSS custom properties)
+   ============================================================= */
+:root {
+  --color-primary:   #2D6A4F;  /* dark green  */
+  --color-secondary: #52B788;  /* medium green */
+  --color-light:     #B7E4C7;  /* light green  */
+  --color-white:     #FFFFFF;
+  --color-text:      #1A1A1A;  /* body text    */
+
+  --font-size-base:  16px;
+  --border-radius:   8px;
+  --transition:      0.2s ease;
+
+  /* nav height — used to offset main content so it isn't hidden under the
+     fixed header */
+  --nav-height: 64px;
+}
+
+
+/* =============================================================
+   CSS RESET / BASE STYLES
+   ============================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  line-height: 1.6;
+
+  /* Push content below the fixed header */
+  padding-top: var(--nav-height);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+
+/* =============================================================
+   NAVIGATION BAR
+   ============================================================= */
+
+/* --- Header shell (fixed bar) --- */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  background-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Inner nav layout --- */
+#main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Logo / site name --- */
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* --- Desktop link list --- */
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.nav-links a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  color: var(--color-white);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* --- Hover: lighten with secondary green --- */
+.nav-links a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* --- Focus: visible Green_Theme outline (keyboard navigation) --- */
+.nav-links a:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 2px;
+}
+
+/* --- Hamburger button (visible only on mobile — see media query below) --- */
+.hamburger-btn {
+  display: none;           /* hidden on desktop */
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  line-height: 0;          /* collapse extra space around the SVG */
+  transition: background-color var(--transition);
+}
+
+.hamburger-btn:hover {
+  background-color: var(--color-secondary);
+}
+
+.hamburger-btn:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 2px;
+}
+
+
+/* =============================================================
+   SHARED SECTION UTILITIES
+   ============================================================= */
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.section-inner > h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+
+/* =============================================================
+   PLACEHOLDER — sections added in later tasks
+   ============================================================= */
+/* (Hero, Community, Events sections are fully implemented below) */
+
+/* =============================================================
+   HERO SECTION
+   ============================================================= */
+#hero {
+  background-color: var(--color-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+.hero-inner h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.hero-subheadline {
+  font-size: 1.15rem;
+  color: var(--color-light);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA button */
+.btn-cta {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition), color var(--transition),
+              transform var(--transition);
+}
+
+.btn-cta:hover {
+  background-color: var(--color-light);
+  color: var(--color-primary);
+}
+
+.btn-cta:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 3px;
+}
+
+.btn-cta:active {
+  transform: translateY(1px);
+}
+
+
+/* =============================================================
+   COMMUNITY SECTION
+   ============================================================= */
+#community {
+  background-color: #F4FAF7; /* very light green tint */
+}
+
+.community-intro {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+/* Feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-light);
+  border-radius: var(--border-radius);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.feature-card:hover {
+  box-shadow: 0 6px 18px rgba(45, 106, 79, 0.12);
+  transform: translateY(-3px);
+}
+
+.feature-card svg {
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.feature-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* =============================================================
+   EVENTS SECTION
+   ============================================================= */
+#events {
+  background-color: var(--color-white);
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.event-card {
+  border-left: 4px solid var(--color-primary);
+  background-color: #F4FAF7;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  padding: 1.5rem 1.75rem;
+  transition: box-shadow var(--transition);
+}
+
+.event-card:hover {
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.12);
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+/* Delivery mode badge */
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.badge--online {
+  background-color: var(--color-light);
+  color: var(--color-primary);
+}
+
+.badge--inperson {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.event-date {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.event-desc {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 0.9rem;
+}
+
+.event-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+
+.event-link:hover {
+  color: var(--color-secondary);
+}
+
+.event-link:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+
+
+#site-footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 2.5rem 1.5rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* --- Brand block --- */
+.footer-logo {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  opacity: 0.85;
+}
+
+/* --- Footer nav links --- */
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.footer-nav a {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  color: var(--color-white);
+  font-size: 0.9rem;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition);
+}
+
+.footer-nav a:hover {
+  background-color: var(--color-secondary);
+}
+
+.footer-nav a:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 2px;
+}
+
+/* --- Responsive: stack vertically on small screens --- */
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer-nav a {
+    padding: 0.5rem 0;
+    border-radius: 0;
+  }
+}
+
+
+/* =============================================================
+   MEMBERS SECTION
+   ============================================================= */
+#members {
+  background-color: var(--color-white);
+}
+
+/* Responsive grid — desktop: auto-fit columns, min 220px */
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual member card */
+.member-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light);
+  border-radius: var(--border-radius);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.member-card:hover {
+  box-shadow: 0 6px 16px rgba(45, 106, 79, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Avatar image */
+.member-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-secondary);
+  flex-shrink: 0;
+}
+
+/* Member name */
+.member-card .member-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.4;
+  /* enforce ≤ 60 chars visually with overflow */
+  overflow-wrap: break-word;
+}
+
+/* Member role */
+.member-card .member-role {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+
+/* =============================================================
+   RESPONSIVE — 768 px BREAKPOINT
+   ============================================================= */
+@media (max-width: 768px) {
+  /* Hide horizontal links on mobile */
+  .nav-links {
+    display: none;
+  }
+
+  /* Show the hamburger button */
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When .nav-open is on <nav>, show links as vertical dropdown */
+  #main-nav.nav-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    padding: 0.5rem 0 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  #main-nav.nav-open .nav-links a {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0;
+  }
+
+  /* Members grid → single column on mobile */
+  .members-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =============================================================
+   CONTACT SECTION
+   ============================================================= */
+#contact {
+  background-color: #F4FAF7; /* very light green tint */
+}
+
+/* Two-column layout: form (left) + details (right) */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* --- Form wrapper --- */
+.contact-form-wrapper {
+  /* no extra styles needed — grid handles sizing */
+}
+
+/* --- Form groups (label + input + error) --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-light);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.25);
+}
+
+/* Invalid state (set by JS when errors are present) */
+.form-group input.field-error,
+.form-group textarea.field-error {
+  border-color: #C0392B;
+}
+
+/* Inline error messages */
+.error-msg {
+  font-size: 0.8rem;
+  color: #C0392B;
+  min-height: 1.1em; /* reserve space so layout doesn't jump */
+}
+
+/* --- Submit button --- */
+.btn-submit {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.btn-submit:hover {
+  background-color: var(--color-secondary);
+}
+
+.btn-submit:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 2px;
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* --- Contact details sidebar --- */
+.contact-details {
+  padding: 2rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--border-radius);
+}
+
+.contact-details h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.contact-details p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+/* Contact list (email + socials) */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.contact-list svg {
+  flex-shrink: 0;
+  color: var(--color-light);
+}
+
+.contact-list a {
+  color: var(--color-white);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+
+.contact-list a:hover {
+  color: var(--color-light);
+}
+
+.contact-list a:focus-visible {
+  outline: 3px solid var(--color-light);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Success / Error feedback messages (injected by JS) --- */
+.success-msg {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background-color: #D8F3DC;
+  color: #1B4332;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+}
+
+.error-banner {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background-color: #FDECEA;
+  color: #7B1D1D;
+  border: 1px solid #F5C2C0;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+}
+
+/* --- Responsive: single column on ≤ 768px --- */
+@media (max-width: 768px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
